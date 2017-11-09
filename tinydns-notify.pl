@@ -42,6 +42,10 @@ while (<>)
 my $res = new Net::DNS::Resolver;
 $res->srcaddr($myip);
 
+my $op = 'NOTIFY';
+eval { my $p = new Net::DNS::Packet; $p->header->opcode($op); };
+$op = 'NS_NOTIFY_OP' if $@;
+
 foreach $s (keys %notify)
 {
   next unless $_ = $notify{$s};
@@ -49,7 +53,7 @@ foreach $s (keys %notify)
   {
     my $packet = new Net::DNS::Packet($_, "SOA", "IN");
     die unless defined $packet;
-    ($packet->header)->opcode("NS_NOTIFY_OP");
+    ($packet->header)->opcode($op);
     ($packet->header)->rd(0);
     ($packet->header)->aa(1);
     my $server = inet_ntoa($s);

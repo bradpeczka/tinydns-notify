@@ -3,6 +3,8 @@ tinydns-notify.pl
 
 Takes a tinydns zone and a list of slave addresses, sends a "NOTIFY" message only to slaves that are running BIND, and only when their zones have changed. Modified by me, from the original script by Andrew Pam, for machines with multiple IP addresses.
 
+**Update 2019-10-08**: I haven't updated, or used, the code in this project in a very long time. You might find some inspiration from it, but otherwise please consider it to be unsupported.
+
 Requirements
 ------------
 
